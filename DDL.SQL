@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS CarreraBurros;
 CREATE DATABASE CarreraBurros;
 USE CarreraBurros;
 
@@ -44,11 +45,9 @@ CREATE TABLE Apuestas(
 Id_Apuesta INT PRIMARY KEY auto_increment,
 Particpante_id INT,
 Competencia_id INT,
+Burro_id INT,
 SaldoApuesta INT,
 FOREIGN KEY (Particpante_id) REFERENCES Participante(Id_Participante) ON DELETE CASCADE,
-FOREIGN KEY (Competencia_id) REFERENCES Competencias(Id_Competencia) ON DELETE CASCADE
+FOREIGN KEY (Competencia_id) REFERENCES Competencias(Id_Competencia) ON DELETE CASCADE,
+FOREIGN KEY (Burro_id) REFERENCES Burros(Id_Burro) ON DELETE CASCADE
 );
-
-
-
-
