@@ -66,4 +66,10 @@ public class ControlDuenio {
 
     }
     
+    public static void listarDuenios(){
+        CRUD.setConnection(ConexionBD.ConexionBD());
+        String sentencia = "SELECT * FROM Dueño;";
+        CRUD.ListarDueños(sentencia);  
+    };
+    
 }

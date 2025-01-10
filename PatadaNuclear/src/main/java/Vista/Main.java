@@ -42,6 +42,8 @@ public class Main {
 //        ControlCompetencias.listarTodasLasCompetencias();
 //        ControlCompetencias.listarBurrosCompetencia(1);
 //        ControlApuestas.registrarApuesta(1, 1, 1, 20000);
+
+        Menu.MenuPrincipal();
         
         
         
