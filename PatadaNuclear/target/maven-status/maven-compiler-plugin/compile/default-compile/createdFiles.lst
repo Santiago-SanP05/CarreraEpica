@@ -1,0 +1,11 @@
+Vista\Main.class
+Vista\Vista.class
+Conexion\ConexionBD.class
+Clases\Participantes.class
+Clases\Burros.class
+Clases\Duenio.class
+Controladores\ControlRegistro.class
+Clases\BurroCompetencia.class
+Clases\Competencias.class
+Conexion\CRUD.class
+Clases\Apuesta.class
