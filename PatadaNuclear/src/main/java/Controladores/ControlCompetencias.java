@@ -69,5 +69,32 @@ public class ControlCompetencias {
     }
     
     
+    public static void listarTodasLasCompetencias(){
+        
+        CRUD.setConnection(ConexionBD.ConexionBD());
+        
+        String sentencia = "SELECT \n" +
+"	C.Fecha_Inicio,\n" +
+"	C.Lugar,\n" +
+"	C.Estado,\n" +
+"	B.Nombre \n" +
+"	FROM Competencias C\n" +
+"	LEFT JOIN Burros B ON C.Ganador = B.Id_Burro;";
+        CRUD.ListarCompetencias(sentencia);
+    }
+    
+    public static void listarBurrosCompetencia(int id){
+        CRUD.setConnection(ConexionBD.ConexionBD());
+        String sentencia = "SELECT \n" +
+"B.nombre\n" +
+"FROM CompetenciaBurros V\n" +
+"INNER JOIN Burros B ON V.Burro_id = B.Id_Burro\n" +
+"INNER JOIN Competencias C ON V.Competencia_id = C.Id_Competencia\n" +
+"WHERE C.Id_Competencia = ?;";
+        CRUD.BurrosCompetencia(sentencia, id);
+        
+        
+    };
+    
     
 }

@@ -8,10 +8,31 @@ public class Apuesta {
     
     private int participante;
     private int competencia;
+    private int burroApostado;
+    private int saldoApostado;
 
-    public Apuesta(int participante, int competencia) {
+    public Apuesta(int participante, int competencia,int burroApostado,int saldoApostado) {
         this.participante = participante;
         this.competencia = competencia;
+        this.burroApostado = burroApostado;
+        this.saldoApostado = saldoApostado;
+    }
+
+    public int getSaldoApostado() {
+        return saldoApostado;
+    }
+
+    public void setSaldoApostado(int saldoApostado) {
+        this.saldoApostado = saldoApostado;
+    }
+
+
+    public int getBurroApostado() {
+        return burroApostado;
+    }
+
+    public void setBurroApostado(int burroApostado) {
+        this.burroApostado = burroApostado;
     }
 
     public int getParticipante() {

@@ -52,24 +52,73 @@ public class CRUD {
         return true;
     }
 
-    public static void Listar(String sentencia) {
+    public static void ListarDueños(String sentencia) {
         try {
             pstmt = con.prepareStatement(sentencia);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("Id_ninja");
-                String name = rs.getString("nombre");
-                String aldea = rs.getString("Aldea");
+                int id = rs.getInt("Id_Dueño");
+                String name = rs.getString("Nombre");
+                String edad = rs.getString("edad");
 
                 System.out.println(id);
                 System.out.println(name);
-                System.out.println(aldea);
+                System.out.println(edad);
 
             }
 
         } catch (SQLException | RuntimeException sqlex) {
             System.out.println("ERROR RUTINA: " + sqlex);
         }
+    }
+    
+    public static void ListarCompetencias(String sentencia) {
+        try {
+            pstmt = con.prepareStatement(sentencia);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String fecha = rs.getString("Fecha_Inicio");
+                String lugar = rs.getString("Lugar");
+                String estado = rs.getString("Estado");
+                String ganador = rs.getString("Nombre");
+
+                System.out.println(fecha);
+                System.out.println(lugar);
+                System.out.println(estado);
+                System.out.println(ganador);
+
+            }
+
+        } catch (SQLException | RuntimeException sqlex) {
+            System.out.println("ERROR RUTINA: " + sqlex);
+        }
+    }
+    
+    public static String BurrosCompetencia(String sentencia, Object... parametros) {
+        String range = "";
+        try {
+            pstmt = con.prepareStatement(sentencia);
+
+            // Establecer los parámetros para la consulta preparada
+            for (int i = 0; i < parametros.length; i++) {
+                pstmt.setObject(i + 1, parametros[i]);
+            }
+
+            rs = pstmt.executeQuery();
+            
+            while(rs.next()){
+                
+                String nombre = rs.getString("nombre");
+
+                System.out.println(nombre);
+                
+            
+            }
+        } catch (SQLException | RuntimeException sqlex) {
+            System.out.println("ERROR RUTINA: " + sqlex);
+            return "error";
+        }
+        return range;
     }
 
     public static boolean actualizarBD(String sentencia, Object... parametros) {

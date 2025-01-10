@@ -10,24 +10,24 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConexionBD {
-    
-    private static String url = "";
-    private static String user = "root";
-    private static String password = "20052305";
 
-public static Connection ConexionBD() {
-    url = "jdbc:mysql://localhost:3306/carreraBurros";
-    try {
-        Connection con = DriverManager.getConnection(url, user, password);
-        if (con != null) {
-            DatabaseMetaData meta = con.getMetaData();
-            System.out.println("Base de datos conectada: " + meta.getDriverName());
+    private static String url = "";
+    private static String user = "campus2023";
+    private static String password = "campus2023";
+
+    public static Connection ConexionBD() {
+        url = "jdbc:mysql://localhost:3306/CarreraBurros";
+        try {
+            Connection con = DriverManager.getConnection(url, user, password);
+            if (con != null) {
+                DatabaseMetaData meta = con.getMetaData();
+                System.out.println("Proeso realizado con exito -- " + meta.getDriverName());
+            }
+            return con;
+        } catch (SQLException ex) {
+            System.out.println("Error al conectar a la base de datos: " + ex.getMessage());
+            return null;
         }
-        return con;
-    } catch (SQLException ex) {
-        System.out.println("Error al conectar a la base de datos: " + ex.getMessage());
-        return null;
     }
-}
-    
+
 }

@@ -20,7 +20,7 @@ Nombre VARCHAR(45),
 edad VARCHAR(45),
 Raza VARCHAR(100),
 Dueño_id INT,
-FOREIGN KEY (Dueño_id) REFERENCES Dueño(Id_Dueño)
+FOREIGN KEY (Dueño_id) REFERENCES Dueño(Id_Dueño) ON DELETE CASCADE
 );
 
 CREATE TABLE Competencias(
@@ -29,16 +29,15 @@ Fecha_Inicio DATE,
 Lugar VARCHAR(250),
 Estado Boolean,
 Ganador INT,
-FOREIGN KEY (Ganador) REFERENCES Burros(Id_Burro)
+FOREIGN KEY (Ganador) REFERENCES Burros(Id_Burro) ON DELETE CASCADE
 );
 
 CREATE TABLE CompetenciaBurros(
 Id_CompetenciaBurros INT PRIMARY KEY auto_increment,
-Nombre VARCHAR(45),
-edad VARCHAR(45),
-Raza VARCHAR(100),
-Dueño_id INT,
-FOREIGN KEY (Dueño_id) REFERENCES Dueño(Id_Dueño)
+Burro_id int,
+Competencia_id int,
+FOREIGN KEY (Burro_id) REFERENCES Burros(Id_Burro) ON DELETE CASCADE,
+FOREIGN KEY (Competencia_id) REFERENCES Competencias(Id_Competencia) ON DELETE CASCADE
 );
 
 CREATE TABLE Apuestas(
@@ -46,8 +45,8 @@ Id_Apuesta INT PRIMARY KEY auto_increment,
 Particpante_id INT,
 Competencia_id INT,
 SaldoApuesta INT,
-FOREIGN KEY (Particpante_id) REFERENCES Participante(Id_Participante),
-FOREIGN KEY (Competencia_id) REFERENCES Competencias(Id_Competencia)
+FOREIGN KEY (Particpante_id) REFERENCES Participante(Id_Participante) ON DELETE CASCADE,
+FOREIGN KEY (Competencia_id) REFERENCES Competencias(Id_Competencia) ON DELETE CASCADE
 );
 
 

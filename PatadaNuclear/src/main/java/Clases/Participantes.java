@@ -12,9 +12,9 @@ public class Participantes {
     
     private String nombre;
     private String cedula;
-    private String saldoDisponible;
+    private int saldoDisponible;
 
-    public Participantes(String nombre, String cedula, String saldoDisponible) {
+    public Participantes(String nombre, String cedula, int saldoDisponible) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.saldoDisponible = saldoDisponible;
@@ -36,11 +36,11 @@ public class Participantes {
         this.cedula = cedula;
     }
 
-    public String getSaldoDisponible() {
+    public int getSaldoDisponible() {
         return saldoDisponible;
     }
 
-    public void setSaldoDisponible(String saldoDisponible) {
+    public void setSaldoDisponible(int saldoDisponible) {
         this.saldoDisponible = saldoDisponible;
     }
     

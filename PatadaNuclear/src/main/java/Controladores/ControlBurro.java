@@ -4,22 +4,25 @@
  */
 package Controladores;
 
-import Clases.Participantes;
+import Clases.BurroCompetencia;
+import Clases.Burros;
+import Clases.Competencias;
 import Conexion.CRUD;
 import Conexion.ConexionBD;
 import java.sql.SQLException;
 
-public class ControlParticipantes {
-    public static boolean registrarParticipantes(String nombre,String cedula,int saldoDisponible) throws SQLException {
-        Participantes p1 = new Participantes(nombre,cedula,saldoDisponible);
+public class ControlBurro {
+    public static boolean registrarBurro(String nombre,String edad,String raza,int duenio) throws SQLException {
+        
+        Burros b1 = new Burros(nombre, edad, raza, duenio);
 
         CRUD.setConnection(ConexionBD.ConexionBD());
 
-        String sentencia = "INSERT INTO Participante(Nombre, Cedula,SaldoDisponible) VALUES (?, ?,?)";
+        String sentencia = "INSERT INTO Burros(Nombre, edad,Raza,Dueño_id) VALUES (?, ?,?, ?)";
 
         if (CRUD.setAutoCommitBD(false)) {
             try {
-                if (CRUD.insertarBD(sentencia, p1.getNombre(),p1.getCedula(),p1.getSaldoDisponible())) {
+                if (CRUD.insertarBD(sentencia, b1.getNombre(),b1.getEdad(),b1.getRaza(),b1.getDuenio())) {
                     CRUD.commitBD();
                     return true;
                 } else {
@@ -36,17 +39,17 @@ public class ControlParticipantes {
             CRUD.cerrarConexion();
             return false;
         }
-
     }
-//    UPDATE Participante SET Nombre = 'Nuevo Nombre', SaldoDisponible = 5000 WHERE Id_Participante = ?;
-    public static boolean eliminarParticipantes(String documneto) throws SQLException {
-        CRUD.setConnection(ConexionBD.ConexionBD());
+    
+    public static boolean CambiarDuenioBurro(int Duenio, int Burro) throws SQLException {
 
-        String sentencia = "DELETE FROM Participante WHERE Cedula = ?;";
+        CRUD.setConnection(ConexionBD.ConexionBD());
+        
+        String sentencia = "UPDATE Burros SET Dueño_id = ? WHERE Id_Burro = ?;";
 
         if (CRUD.setAutoCommitBD(false)) {
             try {
-                if (CRUD.insertarBD(sentencia,documneto)) {
+                if (CRUD.insertarBD(sentencia,Duenio,Burro)) {
                     CRUD.commitBD();
                     return true;
                 } else {
@@ -55,7 +58,6 @@ public class ControlParticipantes {
                 }
             } catch (Exception e) {
                 CRUD.rollbackBD();
-                System.out.println("Parece que esta cedula no existe");
                 throw e;
             } finally {
                 CRUD.cerrarConexion();
@@ -67,15 +69,17 @@ public class ControlParticipantes {
 
     }
     
-    public static boolean actualizarParticipantes(String Cedula, int SaldoNuevo) throws SQLException {
+    public static boolean registrarBurroCompetencia(int burro,int competencia) throws SQLException {
+        
+        BurroCompetencia bc1 = new BurroCompetencia(burro, competencia);
 
         CRUD.setConnection(ConexionBD.ConexionBD());
 
-        String sentencia = "UPDATE Participante SET SaldoDisponible = ? WHERE Cedula = ?;";
+        String sentencia = "INSERT INTO CompetenciaBurros(Burro_id , Competencia_id ) VALUES (?, ?)";
 
         if (CRUD.setAutoCommitBD(false)) {
             try {
-                if (CRUD.insertarBD(sentencia,SaldoNuevo,Cedula)) {
+                if (CRUD.insertarBD(sentencia,bc1.getBurro(),bc1.getCompetencia())) {
                     CRUD.commitBD();
                     return true;
                 } else {
@@ -92,7 +96,7 @@ public class ControlParticipantes {
             CRUD.cerrarConexion();
             return false;
         }
-
     }
+    
     
 }
